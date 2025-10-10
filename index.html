@@ -1172,7 +1172,7 @@
                 </div>
                 
                 <!-- Desktop Timeline View -->
-                <div id="desktop-timeline" class="desktop-timeline">
+                <div id="desktop-timeline" class="desktop-timeline hidden">
                     <div class="relative">
                         <!-- Timeline line -->
                         <div class="timeline-line"></div>
@@ -1428,7 +1428,29 @@
             
             // Initialize smooth scrolling
             initSmoothScrolling();
+            
+            // Initialize timeline display based on screen size
+            updateTimelineDisplay();
+            
+            // Update timeline display on window resize
+            window.addEventListener('resize', updateTimelineDisplay);
         });
+        
+        // Update timeline display based on screen size
+        function updateTimelineDisplay() {
+            const mobileTimeline = document.getElementById('mobile-timeline');
+            const desktopTimeline = document.getElementById('desktop-timeline');
+            
+            if (window.innerWidth >= 1024) {
+                // Desktop view
+                mobileTimeline.style.display = 'none';
+                desktopTimeline.style.display = 'block';
+            } else {
+                // Mobile/tablet view
+                mobileTimeline.style.display = 'block';
+                desktopTimeline.style.display = 'none';
+            }
+        }
         
         // Load timeline events for mobile view
         function loadMobileTimelineEvents() {
